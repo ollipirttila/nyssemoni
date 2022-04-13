@@ -1,0 +1,9 @@
+.stopSearch {
+  width: 80vw;
+}
+
+.stopList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
