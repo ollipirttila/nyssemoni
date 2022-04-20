@@ -5,10 +5,7 @@ import styles from "./SelectedStopItem.module.css";
 
 const SelectedStopItem = (props) => {
   return (
-    <div
-      className={styles.selectedStopItem}
-      onClick={() => props.onDeselect(null)}
-    >
+    <div className={styles.selectedStopItem} onClick={() => props.onDeselect()}>
       {props.stopData.name + " – " + props.stopData.shortName}
     </div>
   );

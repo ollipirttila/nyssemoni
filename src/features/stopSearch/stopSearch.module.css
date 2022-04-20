@@ -1,8 +1,17 @@
 .stopSearch {
-  width: 80vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.searchInput {
+  width: 60%;
 }
 
 .stopList {
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 10px;
