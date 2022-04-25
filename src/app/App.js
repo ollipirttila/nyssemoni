@@ -1,12 +1,17 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import logo from "../Bus-logo.svg";
+import { useDispatch } from "react-redux";
+import { setSelectedStop } from "../features/stopSearch/stopSearchSlice";
+
+import logo from "../assets/Bus-logo.svg";
 import StopSearch from "../features/stopSearch/StopSearch";
 import MyStops from "../features/stopSearch/MyStops";
 import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
       <div className="App-content">
@@ -14,7 +19,10 @@ function App() {
 
         <BrowserRouter>
           <div className="App-navigation">
-            <Link to="/">Home</Link> <Link to="/mystops">My Stops</Link>
+            <Link onClick={() => dispatch(setSelectedStop(null))} to="/">
+              Home
+            </Link>
+            <Link to="/mystops">My Stops</Link>
           </div>
 
           <Routes>

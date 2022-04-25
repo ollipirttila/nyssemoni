@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import stopIcon from "../assets/bus-stop.svg";
+
 import styles from "./StopItem.module.css";
 
 // TODO: asettaa storen globaaliin tilaan valitun pysäkin tiedot. Sisäinen tila???
@@ -11,7 +13,13 @@ const StopItem = (props) => {
       className={styles.stopItem}
       onClick={() => props.onSelectStop(props.stopData)}
     >
-      {props.stopData.name + " – " + props.stopData.shortName}
+      <img
+        alt="bus stop symbol"
+        src={stopIcon}
+        className={styles.stopItemLogo}
+      />
+      <div className={styles.stopName}>{props.stopData.name}</div>
+      <div className={styles.stopShortName}>{props.stopData.shortName}</div>
     </div>
   );
 };

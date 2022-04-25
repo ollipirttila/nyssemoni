@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchStopDataSet,
@@ -9,6 +9,7 @@ import {
   getStopMonitoringData,
   getStatus,
   getSelectedStop,
+  initializeAppState,
 } from "./stopSearchSlice";
 
 import StopItem from "../../common/StopItem";
@@ -18,30 +19,29 @@ import SelectedStopItem from "../../common/SelectedStopItem";
 import styles from "./StopSearch.module.css";
 
 export default function StopSearch() {
-  const stopData = useSelector(getStopDataSet);
-  const stopMonitoringData = useSelector(getStopMonitoringData);
-  //TODO: näytä loading, jos status on loading.
-  const status = useSelector(getStatus);
-
-  const selectedStop = useSelector(getSelectedStop);
-  const dispatch = useDispatch();
-
   const [searchPhrase, setSearchPhrase] = useState("");
 
-  // Store URLSearchParams object in local state
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Get URL query strings for use in case of direct URL accesss
   let [urlQueryString, setUrlQueryString] = useSearchParams();
-  // Store value of stop URL query string
   let stopFromUrl = urlQueryString.get("stop");
 
-  // Fetch stopdata once when the app first renders
+  const stopData = useSelector(getStopDataSet);
+  const stopMonitoringData = useSelector(getStopMonitoringData);
+  const selectedStop = useSelector(getSelectedStop);
+  //TODO: näytä loadingspinner, jos status on loading.
+  const status = useSelector(getStatus);
+
+  // Fetch stopdata once when the app first renders and set selected stop,
+  // if there is a URL Query string present.
   useEffect(() => {
     stopData.length === 0 && dispatch(fetchStopDataSet());
   }, [dispatch, stopData]);
-  // Set selected stop, if there is a URL Query string present.
+
   useEffect(() => {
-    // TODO: Tätä kutsutaan ennen kuin stopData on ehditty ladata, jolloinka ei toimi.
-    stopFromUrl &&
-      dispatch(setSelectedStop(getStopItemDataByShortname(stopFromUrl)));
+    stopFromUrl && dispatch(initializeAppState(stopFromUrl));
   }, [dispatch, stopFromUrl]);
 
   const selectStop = (stop) => {
@@ -53,12 +53,8 @@ export default function StopSearch() {
 
   const deSelectStop = () => {
     dispatch(setSelectedStop(null));
-    setUrlQueryString({ stop: 0 });
-  };
-
-  const getStopItemDataByShortname = (stopShortName) => {
-    console.log(stopShortName + JSON.stringify(stopData));
-    return stopData.find((item) => item.shortName === stopShortName);
+    stopFromUrl = null;
+    navigate("/");
   };
 
   const SearchResults = stopData.filter(
@@ -76,19 +72,26 @@ export default function StopSearch() {
       ></StopItem>
     );
   });
-
   const renderedBusses = stopMonitoringData.map((bus) => {
     return <BusItem key={bus.vehicleRef} busData={bus}></BusItem>;
   });
 
   return (
     <div className={styles.stopSearch}>
-      <input
-        type="text"
-        className={styles.searchInput}
-        value={searchPhrase}
-        onChange={(e) => setSearchPhrase(e.target.value)}
-      />
+      {!selectedStop && (
+        <div className={styles.searchSection}>
+          <div className={styles.searchDescription}>
+            Find your stop by name or number
+          </div>
+          <input
+            type="text"
+            placeholder="E.g. Keskustori or 0001"
+            className={styles.searchInput}
+            value={searchPhrase}
+            onChange={(e) => setSearchPhrase(e.target.value)}
+          />
+        </div>
+      )}
 
       <div className={styles.stopList}>
         {!selectedStop ? (

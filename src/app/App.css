@@ -12,6 +12,8 @@
   display: flex;
   flex-direction: row;
   gap: 30px;
+  font-size: var(--font-size-large);
+  text-transform: uppercase;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: top;
-  font-size: calc(10px + 2vmin);
+  font-size: var(--font-size-regular);
   gap: 20px;
   padding-top: 20px;
 }
@@ -40,5 +42,11 @@
   }
   100% {
     transform: translateY(0px);
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .App-logo {
+    height: 30vmin;
   }
 }

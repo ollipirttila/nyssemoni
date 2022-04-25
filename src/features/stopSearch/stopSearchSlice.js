@@ -8,6 +8,29 @@ const initialState = {
   stopMonitoringData: [],
 };
 
+// Initialize the app, if there is URL Query string
+export const initializeAppState = createAsyncThunk(
+  "stopSearch/initializeAppState",
+  async (urlStopQuery) => {
+    console.log("Reducer " + urlStopQuery);
+    const stopsResponse = await journeyApi.get("/stop-points");
+    console.log(stopsResponse);
+    const monitoringResponse = await journeyApi.get("/stop-monitoring", {
+      params: {
+        stops: urlStopQuery,
+      },
+    });
+    const payload = {
+      shortName: urlStopQuery,
+      stops: stopsResponse.data.body,
+      monitoringData: monitoringResponse.data.body[urlStopQuery]
+        ? monitoringResponse.data.body[urlStopQuery]
+        : [],
+    };
+    return payload;
+  }
+);
+
 // Fetches a list of all Tampere area bus stops
 export const fetchStopDataSet = createAsyncThunk(
   "stopSearch/fetchStopDataSet",
@@ -25,10 +48,10 @@ export const fetchStopMonitoringData = createAsyncThunk(
       params: {
         stops: stopShortName,
       },
-    });
+    }).data.body;
     // API returns objects that have stopShortName as key and array of busses as its value
     // so we want to return the array only.
-    return response.data.body[stopShortName];
+    return response ? response[stopShortName] : [];
   }
 );
 
@@ -38,6 +61,10 @@ export const stopSearchSlice = createSlice({
   reducers: {
     setSelectedStop: (state, action) => {
       state.selectedStop = action.payload;
+      // Clear stopMonitoringData if stop is deselected to avoid "flickering" when re-selecting a stop
+      if (action.payload === null) {
+        state.stopMonitoringData = [];
+      }
     },
   },
 
@@ -54,8 +81,18 @@ export const stopSearchSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchStopMonitoringData.fulfilled, (state, action) => {
-        state.status = "idle";
         state.stopMonitoringData = action.payload;
+        state.status = "idle";
+      })
+      .addCase(initializeAppState.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(initializeAppState.fulfilled, (state, action) => {
+        state.selectedStop = action.payload.stops.find(
+          (item) => item.shortName === action.payload.shortName
+        );
+        state.stopMonitoringData = action.payload.monitoringData;
+        state.status = "idle";
       });
   },
 });

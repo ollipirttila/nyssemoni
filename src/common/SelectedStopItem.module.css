@@ -1,4 +1,28 @@
 .selectedStopItem {
-  background-color: #0c4e8a;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: var(--nysse-blue);
+  width: 80%;
+  padding: 20px 0;
+  height: 40px;
+  border-radius: var(--border-radius);
   color: white;
+}
+
+.selectedStopItem:hover {
+  background-color: var(--nysse-dark-blue);
+  cursor: pointer;
+}
+
+.selectedStopItemTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.selectedStopItemCloseSelection {
+  font-size: var(--font-size-small);
+  position: absolute;
+  right: 15px;
+  top: 10px;
 }

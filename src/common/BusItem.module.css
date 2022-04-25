@@ -1,5 +1,17 @@
 .busItem {
+  width: 80%;
+  color: white;
+  border-radius: 5px;
+  padding: 20px 0;
+  background-color: var(--dirty-black);
+}
+
+.busItemLine {
+  color: rgb(255, 168, 6);
+  font-weight: 700;
+  text-transform: uppercase;
+
+  border-radius: var(--border-radius);
   width: 100%;
-  color: orange;
-  background-color: black;
+  margin: 0 0 10px 0;
 }
