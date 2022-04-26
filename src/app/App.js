@@ -20,7 +20,7 @@ function App() {
         <BrowserRouter>
           <div className="App-navigation">
             <Link onClick={() => dispatch(setSelectedStop(null))} to="/">
-              Home
+              Search
             </Link>
             <Link to="/mystops">My Stops</Link>
           </div>

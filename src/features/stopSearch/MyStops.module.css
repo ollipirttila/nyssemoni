@@ -3,5 +3,62 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+}
+.myStopsDescription {
+  width: 80%;
+  color: var(--dark-grey);
+  margin-bottom: 10px;
+}
+.myStopsItemsRow {
+  width: 90%;
+  min-width: 280px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.myStopsItem {
+  line-height: 3.5rem;
+  height: 3.5rem;
+  max-width: 90%;
+  border: solid var(--dark-grey);
+  border-width: 1px 0 1px 1px;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  color: var(--dark-grey);
+  flex-grow: 9;
+}
+
+.myStopsItem:hover {
+  cursor: pointer;
+  color: var(--nysse-blue);
+  background-color: var(--nysse-dark-blue);
+  color: white;
+}
+.deleteItem,
+.editItem {
+  min-width: 10%;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  flex-grow: 1;
+  border: 1px solid var(--dark-grey);
+}
+.deleteItem {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+.editItem {
+  border-width: 1px 0 1px 1px;
+}
+.deleteItem:hover,
+.editItem:hover {
+  background-color: var(--nysse-dark-blue);
+}
+
+.deleteItem:hover > .deleteIcon,
+.editItem:hover > .editIcon {
+  color: white;
+}
+
+.deleteIcon,
+.editIcon {
+  color: var(--dark-grey);
 }

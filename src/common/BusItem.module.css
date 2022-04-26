@@ -7,7 +7,7 @@
 }
 
 .busItemLine {
-  color: rgb(255, 168, 6);
+  color: var(--bus-orange);
   font-weight: 700;
   text-transform: uppercase;
 

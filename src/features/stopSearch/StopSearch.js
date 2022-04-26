@@ -13,6 +13,7 @@ import {
 } from "./stopSearchSlice";
 
 import StopItem from "../../common/StopItem";
+import Button from "../../common/Button";
 import BusItem from "../../common/BusItem";
 import SelectedStopItem from "../../common/SelectedStopItem";
 
@@ -20,6 +21,7 @@ import styles from "./StopSearch.module.css";
 
 export default function StopSearch() {
   const [searchPhrase, setSearchPhrase] = useState("");
+  const [stopSavedToBrowser, setStopSavedToBrowser] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,15 +36,23 @@ export default function StopSearch() {
   //TODO: näytä loadingspinner, jos status on loading.
   const status = useSelector(getStatus);
 
-  // Fetch stopdata once when the app first renders and set selected stop,
-  // if there is a URL Query string present.
+  // Fetch stopdata once when the app first renders
   useEffect(() => {
     stopData.length === 0 && dispatch(fetchStopDataSet());
   }, [dispatch, stopData]);
 
+  // If there is a URL Query string present, select the stop and initialize the app.
   useEffect(() => {
     stopFromUrl && dispatch(initializeAppState(stopFromUrl));
   }, [dispatch, stopFromUrl]);
+
+  // When monitoring a stop, check if it is already saved to local browser memory
+  useEffect(() => {
+    if (localStorage.getItem(stopFromUrl) !== null) {
+      setStopSavedToBrowser(true);
+    }
+    return () => setStopSavedToBrowser(false);
+  }, [stopFromUrl, stopSavedToBrowser]);
 
   const selectStop = (stop) => {
     dispatch(setSelectedStop(stop));
@@ -55,6 +65,12 @@ export default function StopSearch() {
     dispatch(setSelectedStop(null));
     stopFromUrl = null;
     navigate("/");
+  };
+
+  const saveToBrowser = () => {
+    localStorage.setItem(selectedStop.shortName, selectedStop.name);
+    setStopSavedToBrowser(true);
+    console.log(localStorage);
   };
 
   const SearchResults = stopData.filter(
@@ -78,6 +94,7 @@ export default function StopSearch() {
 
   return (
     <div className={styles.stopSearch}>
+      {/* Search input field */}
       {!selectedStop && (
         <div className={styles.searchSection}>
           <div className={styles.searchDescription}>
@@ -92,18 +109,25 @@ export default function StopSearch() {
           />
         </div>
       )}
-
+      {/* Listing search results */}
       <div className={styles.stopList}>
         {!selectedStop ? (
           searchPhrase.length !== 0 ? (
             renderedStops
           ) : null
         ) : (
+          // Showing stops of selected bus stop
           <Fragment>
             <SelectedStopItem
               stopData={selectedStop}
               onDeselect={deSelectStop}
             ></SelectedStopItem>
+            {!stopSavedToBrowser && (
+              <Button onClickHandler={() => saveToBrowser}>
+                Save stop to browser
+              </Button>
+            )}
+
             {renderedBusses}
           </Fragment>
         )}

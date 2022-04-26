@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./SelectedStopItem.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const SelectedStopItem = (props) => {
   const [showCloseSelection, setShowCloseSelection] = useState(false);

@@ -1,0 +1,8 @@
+.button {
+  background-color: white;
+  width: 80%;
+  text-align: center;
+  border: 1px solid var(--nysse-blue);
+  border-radius: var(--border-radius);
+  padding: 20px 0;
+}

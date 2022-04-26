@@ -12,9 +12,7 @@ const initialState = {
 export const initializeAppState = createAsyncThunk(
   "stopSearch/initializeAppState",
   async (urlStopQuery) => {
-    console.log("Reducer " + urlStopQuery);
     const stopsResponse = await journeyApi.get("/stop-points");
-    console.log(stopsResponse);
     const monitoringResponse = await journeyApi.get("/stop-monitoring", {
       params: {
         stops: urlStopQuery,
