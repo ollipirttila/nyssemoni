@@ -14,6 +14,7 @@ import {
 
 import StopItem from "../../common/StopItem";
 import Button from "../../common/Button";
+import SaveDialog from "../../common/SaveDialog";
 import BusItem from "../../common/BusItem";
 import SelectedStopItem from "../../common/SelectedStopItem";
 
@@ -22,6 +23,7 @@ import styles from "./StopSearch.module.css";
 export default function StopSearch() {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [stopSavedToBrowser, setStopSavedToBrowser] = useState(false);
+  const [saveDialogActive, setSaveDialogActive] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,10 +69,21 @@ export default function StopSearch() {
     navigate("/");
   };
 
-  const saveToBrowser = () => {
-    localStorage.setItem(selectedStop.shortName, selectedStop.name);
-    setStopSavedToBrowser(true);
+  const toggleSaveDialog = () => {
+    setSaveDialogActive(!saveDialogActive);
+  };
+
+  const HandleSaveSubmit = (customName) => {
+    localStorage.setItem(
+      selectedStop.shortName,
+      JSON.stringify({
+        userStopName: customName,
+        stopName: selectedStop.name,
+      })
+    );
     console.log(localStorage);
+    setStopSavedToBrowser(true);
+    toggleSaveDialog();
   };
 
   const SearchResults = stopData.filter(
@@ -122,10 +135,20 @@ export default function StopSearch() {
               stopData={selectedStop}
               onDeselect={deSelectStop}
             ></SelectedStopItem>
-            {!stopSavedToBrowser && (
-              <Button onClickHandler={() => saveToBrowser}>
+
+            {/* Saving stop to my stops */}
+            {!stopSavedToBrowser && !saveDialogActive && (
+              <Button onClickHandler={() => toggleSaveDialog}>
                 Save stop to browser
               </Button>
+            )}
+            {saveDialogActive && (
+              <SaveDialog
+                onSaveCancel={toggleSaveDialog}
+                onSaveSubmit={HandleSaveSubmit}
+              >
+                Save to my stops
+              </SaveDialog>
             )}
 
             {renderedBusses}

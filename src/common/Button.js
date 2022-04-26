@@ -5,7 +5,7 @@ import styles from "./Button.module.css";
 
 const Button = (props) => {
   return (
-    <button className={styles.button} onClick={props.onClickHandler()}>
+    <button onClick={props.onClickHandler()} className={styles.button}>
       {props.children}
     </button>
   );

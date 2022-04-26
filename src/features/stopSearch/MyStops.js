@@ -25,21 +25,27 @@ const MyStops = (props) => {
             onClick={() => navigate(`/?stop=${key}`)}
             className={styles.myStopsItem}
           >
-            {key} - {localStorage[key]}
+            <span className={styles.userStopNameTitle}>
+              {JSON.parse(localStorage[key]).userStopName} –
+            </span>
+            <span className={styles.stopNameTitle}>
+              {JSON.parse(localStorage[key]).stopName} / {key}
+            </span>
           </div>
 
-          <div className={styles.editItem}>
+          <div onClick={() => console.log("EDIT!")} className={styles.editItem}>
             <FontAwesomeIcon
-              onClick={() => console.log("EDIT!")}
               className={styles.editIcon}
               icon={faPen}
               size="sm"
             />
           </div>
 
-          <div className={styles.deleteItem}>
+          <div
+            onClick={() => deleteSavedStop(key)}
+            className={styles.deleteItem}
+          >
             <FontAwesomeIcon
-              onClick={() => deleteSavedStop(key)}
               className={styles.deleteIcon}
               icon={faTrash}
               size="sm"

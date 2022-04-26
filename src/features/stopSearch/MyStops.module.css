@@ -34,6 +34,12 @@
   background-color: var(--nysse-dark-blue);
   color: white;
 }
+.userStopNameTitle {
+  font-weight: 700;
+}
+.stopNameTitle {
+  font-style: italic;
+}
 .deleteItem,
 .editItem {
   min-width: 10%;

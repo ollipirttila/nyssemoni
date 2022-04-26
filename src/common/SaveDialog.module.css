@@ -1,0 +1,43 @@
+.saveDialog {
+  color: var(--dark-grey);
+  padding: 1rem 0 1rem 0;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.75rem;
+  align-items: center;
+  background-color: white;
+  width: 80%;
+  min-height: 35vh;
+  text-align: center;
+  border: 1px solid var(--nysse-blue);
+  border-radius: var(--border-radius);
+}
+.description {
+  text-transform: uppercase;
+}
+.label {
+}
+
+.input {
+  box-sizing: border-box;
+  padding: 0 10px;
+  width: 80%;
+  height: 2.5rem;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  width: 80%;
+  height: 3rem;
+  text-align: center;
+  border: 1px solid var(--nysse-blue);
+  border-radius: var(--border-radius);
+}
+.buttonPrimary {
+  background-color: var(--nysse-blue);
+}
+.buttonSecondary {
+  background-color: white;
+
+  height: 2.5rem;
+}
