@@ -1,13 +1,13 @@
-This project was is learning project I used to learn React with Redux ([Redux Toolkit](https://redux-toolkit.js.org/) template).
+This project is a learning project I used to learn React with Redux ([Redux Toolkit](https://redux-toolkit.js.org/) template).
 Usage of Redux store in such a small app might be a bit overkill, but this app was made in order to learn structures and practices to build more complex apps.
 
 ## App features
 
-The app leverages Tampere City's Public Transport Information API [Journeys API](https://data.tampere.fi/data/en_GB/dataset/journeys-api).
+Nyssemoni is a dashboard app I actually use every day to view real time data about departing busses from my daily bus stops, e.g. to and from work, hobbies etc. on my mobile phone, ipad or second monitor. The app leverages Tampere City's Public Transport Information API called [Journeys API](https://data.tampere.fi/data/en_GB/dataset/journeys-api) and browser local storage to save user preferences.
 
 ### In the app you can:
 
-1. Search for a Tampere region buss stop by name or code
+1. Search for a Tampere region bus stop by name or code
 2. Save any stop to your favourite stops for quick access
 3. Edit and delete your quick access stops.
 
