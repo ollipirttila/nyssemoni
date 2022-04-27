@@ -79,9 +79,10 @@ export default function StopSearch() {
     navigate("/");
   };
 
-  const HandleSaveSubmit = (customName) => {
+  const HandleSaveSubmit = (stopKey, customName) => {
+    console.log(selectedStop);
     localStorage.setItem(
-      selectedStop.shortName,
+      stopKey,
       JSON.stringify({
         userStopName: customName,
         stopName: selectedStop.name,
@@ -142,12 +143,13 @@ export default function StopSearch() {
 
             {/* Saving stop to my stops */}
             {!stopSavedToBrowser && !dialogOpen && (
-              <Button onClickHandler={() => openDialog()}>
+              <Button handleOnClick={() => openDialog()}>
                 Save stop to browser
               </Button>
             )}
             {dialogOpen && (
               <MyStopDialog
+                stopKey={selectedStop.shortName}
                 nameValue={""}
                 onSaveCancel={() => closeDialog()}
                 onSaveSubmit={HandleSaveSubmit}

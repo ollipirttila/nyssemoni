@@ -43,6 +43,7 @@
   color: white;
 }
 .userStopNameTitle {
+  text-transform: uppercase;
   font-weight: 700;
 }
 .stopNameTitle {

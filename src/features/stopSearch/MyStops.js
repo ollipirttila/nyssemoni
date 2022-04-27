@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import MyStopDialog from "../../common/MyStopDialog";
@@ -25,6 +24,17 @@ const MyStops = (props) => {
       : setOpenEditDialog([]);
   };
 
+  const HandleEditSubmit = (key, customName) => {
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        userStopName: customName,
+        stopName: JSON.parse(localStorage[key]).stopName,
+      })
+    );
+    toggleEditDialog();
+  };
+
   const getSavedStops = () => {
     const savedStops = [];
     keys.forEach((key) => {
@@ -39,7 +49,7 @@ const MyStops = (props) => {
                 {JSON.parse(localStorage[key]).userStopName} –
               </span>
               <span className={styles.stopNameTitle}>
-                {JSON.parse(localStorage[key]).stopName} / {key}
+                {JSON.parse(localStorage[key]).stopName + " / " + key}
               </span>
             </div>
 
@@ -67,9 +77,10 @@ const MyStops = (props) => {
           </div>
           {openEditDialog.find((item) => item === key) ? (
             <MyStopDialog
+              stopKey={key}
               nameValue={JSON.parse(localStorage[key]).userStopName}
               onSaveCancel={toggleEditDialog}
-              onSaveSubmit={() => console.log("blooo")}
+              onSaveSubmit={HandleEditSubmit}
             >
               Edit my stop
             </MyStopDialog>

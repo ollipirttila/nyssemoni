@@ -6,7 +6,7 @@ import styles from "./MyStopDialog.module.css";
 const SaveDialog = (props) => {
   const [customName, setCustomName] = useState(props.nameValue);
   return (
-    <div className={styles.saveDialog}>
+    <div className={styles.myStopDialog}>
       <div className={styles.description}>{props.children}</div>
 
       <label htmlFor="stopname" className={styles.label}>
@@ -29,7 +29,7 @@ const SaveDialog = (props) => {
       </button>
       <button
         className={styles.buttonPrimary}
-        onClick={() => props.onSaveSubmit(customName)}
+        onClick={() => props.onSaveSubmit(props.stopKey, customName)}
       >
         Save
       </button>
