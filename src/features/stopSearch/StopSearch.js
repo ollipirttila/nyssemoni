@@ -5,18 +5,16 @@ import {
   fetchStopDataSet,
   fetchStopMonitoringData,
   setSelectedStop,
-  setStopDialogOpen,
   getStopDataSet,
   getStopMonitoringData,
   getStatus,
   getSelectedStop,
   initializeAppState,
-  getStopDialogOpen,
 } from "./stopSearchSlice";
 
 import StopItem from "../../common/StopItem";
 import Button from "../../common/Button";
-import SaveDialog from "../../common/SaveDialog";
+import MyStopDialog from "../../common/MyStopDialog";
 import BusItem from "../../common/BusItem";
 import SelectedStopItem from "../../common/SelectedStopItem";
 
@@ -25,6 +23,14 @@ import styles from "./StopSearch.module.css";
 export default function StopSearch() {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [stopSavedToBrowser, setStopSavedToBrowser] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +42,6 @@ export default function StopSearch() {
   const stopData = useSelector(getStopDataSet);
   const stopMonitoringData = useSelector(getStopMonitoringData);
   const selectedStop = useSelector(getSelectedStop);
-  const stopDialogOpen = useSelector(getStopDialogOpen);
 
   //TODO: näytä loadingspinner, jos status on loading.
   const status = useSelector(getStatus);
@@ -47,8 +52,10 @@ export default function StopSearch() {
   }, [dispatch, stopData]);
 
   // If there is a URL Query string present, select the stop and initialize the app.
+  // Also reset the dialog state and selectedStop, if the URL changes.
   useEffect(() => {
     stopFromUrl && dispatch(initializeAppState(stopFromUrl));
+    closeDialog();
   }, [dispatch, stopFromUrl]);
 
   // When monitoring a stop, check if it is already saved to local browser memory
@@ -68,13 +75,8 @@ export default function StopSearch() {
 
   const deSelectStop = () => {
     dispatch(setSelectedStop(null));
-    dispatch(setStopDialogOpen());
     stopFromUrl = null;
     navigate("/");
-  };
-
-  const toggleSaveDialog = () => {
-    dispatch(setStopDialogOpen());
   };
 
   const HandleSaveSubmit = (customName) => {
@@ -86,7 +88,7 @@ export default function StopSearch() {
       })
     );
     setStopSavedToBrowser(true);
-    toggleSaveDialog();
+    closeDialog();
   };
 
   const SearchResults = stopData.filter(
@@ -107,7 +109,6 @@ export default function StopSearch() {
   const renderedBusses = stopMonitoringData.map((bus) => {
     return <BusItem key={bus.vehicleRef} busData={bus}></BusItem>;
   });
-
   return (
     <div className={styles.stopSearch}>
       {/* Search input field */}
@@ -140,18 +141,19 @@ export default function StopSearch() {
             ></SelectedStopItem>
 
             {/* Saving stop to my stops */}
-            {!stopSavedToBrowser && !stopDialogOpen && (
-              <Button onClickHandler={() => toggleSaveDialog}>
+            {!stopSavedToBrowser && !dialogOpen && (
+              <Button onClickHandler={() => openDialog()}>
                 Save stop to browser
               </Button>
             )}
-            {stopDialogOpen && (
-              <SaveDialog
-                onSaveCancel={toggleSaveDialog}
+            {dialogOpen && (
+              <MyStopDialog
+                nameValue={""}
+                onSaveCancel={() => closeDialog()}
                 onSaveSubmit={HandleSaveSubmit}
               >
                 Save to my stops
-              </SaveDialog>
+              </MyStopDialog>
             )}
 
             {renderedBusses}

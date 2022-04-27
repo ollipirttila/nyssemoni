@@ -9,7 +9,7 @@
   width: 80%;
   min-height: 35vh;
   text-align: center;
-  border: 1px solid var(--nysse-blue);
+  border: 1px solid var(--dark-grey);
   border-radius: var(--border-radius);
 }
 .description {

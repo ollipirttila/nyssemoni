@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import styles from "./SaveDialog.module.css";
+import styles from "./MyStopDialog.module.css";
 
 const SaveDialog = (props) => {
-  const [customName, setCustomName] = useState("");
+  const [customName, setCustomName] = useState(props.nameValue);
   return (
     <div className={styles.saveDialog}>
       <div className={styles.description}>{props.children}</div>
@@ -20,7 +20,11 @@ const SaveDialog = (props) => {
         onChange={(e) => setCustomName(e.target.value)}
         className={styles.input}
       />
-      <button className={styles.buttonSecondary} onClick={props.onSaveCancel}>
+      <button
+        className={styles.buttonSecondary}
+        s
+        onClick={() => props.onSaveCancel()}
+      >
         Cancel
       </button>
       <button

@@ -10,8 +10,16 @@
   color: var(--dark-grey);
   margin-bottom: 10px;
 }
+
+.MystopsItemContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 80%;
+  gap: 5px;
+}
 .myStopsItemsRow {
-  width: 90%;
+  width: 80%;
   min-width: 280px;
   display: flex;
   flex-flow: row nowrap;
