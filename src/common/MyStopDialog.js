@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styles from "./MyStopDialog.module.css";
 
-const SaveDialog = (props) => {
+const MyStopDialog = (props) => {
   const [customName, setCustomName] = useState(props.nameValue);
   return (
     <div className={styles.myStopDialog}>
@@ -36,4 +36,4 @@ const SaveDialog = (props) => {
   );
 };
 
-export default SaveDialog;
+export default MyStopDialog;
