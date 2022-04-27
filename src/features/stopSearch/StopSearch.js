@@ -7,7 +7,6 @@ import {
   setSelectedStop,
   getStopDataSet,
   getStopMonitoringData,
-  getStatus,
   getSelectedStop,
   initializeAppState,
 } from "./stopSearchSlice";
@@ -43,8 +42,8 @@ export default function StopSearch() {
   const stopMonitoringData = useSelector(getStopMonitoringData);
   const selectedStop = useSelector(getSelectedStop);
 
-  //TODO: näytä loadingspinner, jos status on loading.
-  const status = useSelector(getStatus);
+  //TODO: Show a loading spinner while data is loading.
+  // const status = useSelector(getStatus);
 
   // Fetch stopdata once when the app first renders
   useEffect(() => {
@@ -80,7 +79,6 @@ export default function StopSearch() {
   };
 
   const HandleSaveSubmit = (stopKey, customName) => {
-    console.log(selectedStop);
     localStorage.setItem(
       stopKey,
       JSON.stringify({
