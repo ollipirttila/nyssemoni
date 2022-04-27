@@ -35,9 +35,18 @@
 }
 .buttonPrimary {
   background-color: var(--nysse-blue);
+  color: white;
 }
 .buttonSecondary {
   background-color: white;
+  color: var(--nysse-blue);
 
   height: 2.5rem;
+}
+.buttonPrimary:hover {
+  background-color: var(--nysse-dark-blue);
+}
+.buttonSecondary:hover {
+  background-color: var(--nysse-dark-blue);
+  color: white;
 }

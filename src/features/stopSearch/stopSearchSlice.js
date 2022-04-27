@@ -6,6 +6,7 @@ const initialState = {
   status: "idle",
   selectedStop: null,
   stopMonitoringData: [],
+  stopDialogOpen: false,
 };
 
 // Initialize the app, if there is URL Query string
@@ -64,6 +65,9 @@ export const stopSearchSlice = createSlice({
         state.stopMonitoringData = [];
       }
     },
+    setStopDialogOpen: (state) => {
+      state.stopDialogOpen = !state.stopDialogOpen;
+    },
   },
 
   extraReducers: (builder) => {
@@ -95,11 +99,12 @@ export const stopSearchSlice = createSlice({
   },
 });
 
-export const { setSelectedStop } = stopSearchSlice.actions;
+export const { setSelectedStop, setStopDialogOpen } = stopSearchSlice.actions;
 
 export const getStopDataSet = (state) => state.stopSearch.stopDataSet;
 export const getStatus = (state) => state.stopSearch.status;
 export const getSelectedStop = (state) => state.stopSearch.selectedStop;
+export const getStopDialogOpen = (state) => state.stopSearch.stopDialogOpen;
 export const getStopMonitoringData = (state) =>
   state.stopSearch.stopMonitoringData;
 

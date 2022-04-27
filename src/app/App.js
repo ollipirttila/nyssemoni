@@ -2,7 +2,10 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { setSelectedStop } from "../features/stopSearch/stopSearchSlice";
+import {
+  setSelectedStop,
+  setStopDialogOpen,
+} from "../features/stopSearch/stopSearchSlice";
 
 import logo from "../assets/Bus-logo.svg";
 import StopSearch from "../features/stopSearch/StopSearch";
@@ -12,6 +15,11 @@ import "./App.css";
 function App() {
   const dispatch = useDispatch();
 
+  const clearState = () => {
+    dispatch(setSelectedStop(null));
+    dispatch(setStopDialogOpen());
+  };
+
   return (
     <div className="App">
       <div className="App-content">
@@ -19,7 +27,7 @@ function App() {
 
         <BrowserRouter>
           <div className="App-navigation">
-            <Link onClick={() => dispatch(setSelectedStop(null))} to="/">
+            <Link onClick={clearState} to="/">
               Search
             </Link>
             <Link to="/mystops">My Stops</Link>

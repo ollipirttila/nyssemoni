@@ -5,11 +5,13 @@ import {
   fetchStopDataSet,
   fetchStopMonitoringData,
   setSelectedStop,
+  setStopDialogOpen,
   getStopDataSet,
   getStopMonitoringData,
   getStatus,
   getSelectedStop,
   initializeAppState,
+  getStopDialogOpen,
 } from "./stopSearchSlice";
 
 import StopItem from "../../common/StopItem";
@@ -23,7 +25,6 @@ import styles from "./StopSearch.module.css";
 export default function StopSearch() {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [stopSavedToBrowser, setStopSavedToBrowser] = useState(false);
-  const [saveDialogActive, setSaveDialogActive] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +36,8 @@ export default function StopSearch() {
   const stopData = useSelector(getStopDataSet);
   const stopMonitoringData = useSelector(getStopMonitoringData);
   const selectedStop = useSelector(getSelectedStop);
+  const stopDialogOpen = useSelector(getStopDialogOpen);
+
   //TODO: näytä loadingspinner, jos status on loading.
   const status = useSelector(getStatus);
 
@@ -65,12 +68,13 @@ export default function StopSearch() {
 
   const deSelectStop = () => {
     dispatch(setSelectedStop(null));
+    dispatch(setStopDialogOpen());
     stopFromUrl = null;
     navigate("/");
   };
 
   const toggleSaveDialog = () => {
-    setSaveDialogActive(!saveDialogActive);
+    dispatch(setStopDialogOpen());
   };
 
   const HandleSaveSubmit = (customName) => {
@@ -81,7 +85,6 @@ export default function StopSearch() {
         stopName: selectedStop.name,
       })
     );
-    console.log(localStorage);
     setStopSavedToBrowser(true);
     toggleSaveDialog();
   };
@@ -137,12 +140,12 @@ export default function StopSearch() {
             ></SelectedStopItem>
 
             {/* Saving stop to my stops */}
-            {!stopSavedToBrowser && !saveDialogActive && (
+            {!stopSavedToBrowser && !stopDialogOpen && (
               <Button onClickHandler={() => toggleSaveDialog}>
                 Save stop to browser
               </Button>
             )}
-            {saveDialogActive && (
+            {stopDialogOpen && (
               <SaveDialog
                 onSaveCancel={toggleSaveDialog}
                 onSaveSubmit={HandleSaveSubmit}
