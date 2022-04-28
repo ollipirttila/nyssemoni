@@ -17,7 +17,7 @@ const BusItem = (props) => {
     const minuteStr = Math.abs(timeDifference) > 1 ? " minutes" : " minute";
     const delayType =
       timeDifference > 0 ? " behind schedule" : " ahead of schedule";
-    if (timeDifference != 0) {
+    if (timeDifference !== 0) {
       return Math.abs(timeDifference) + minuteStr + delayType;
     }
     return "On schedule";
