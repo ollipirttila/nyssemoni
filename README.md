@@ -1,4 +1,4 @@
-This project is a learning project I used to learn React with Redux ([Redux Toolkit](https://redux-toolkit.js.org/) template).
+This is a learning project I used to learn React with Redux ([Redux Toolkit](https://redux-toolkit.js.org/) template).
 Usage of Redux store in such a small app might be a bit overkill, but this app was made in order to learn structures and practices to build more complex apps.
 
 ## App features

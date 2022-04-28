@@ -1,6 +1,6 @@
 .button {
   background-color: white;
-  width: 80%;
+  width: 90%;
   text-align: center;
   border: 1px solid var(--nysse-blue);
   border-radius: var(--border-radius);

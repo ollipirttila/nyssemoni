@@ -6,7 +6,7 @@
   gap: 15px;
 }
 .myStopsDescription {
-  width: 80%;
+  width: 90%;
   color: var(--dark-grey);
   margin-bottom: 10px;
 }
@@ -15,11 +15,11 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  width: 80%;
+  width: 90%;
   gap: 5px;
 }
 .myStopsItemsRow {
-  width: 80%;
+  width: 90%;
   min-width: 280px;
   display: flex;
   flex-flow: row nowrap;

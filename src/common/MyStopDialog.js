@@ -21,7 +21,6 @@ const MyStopDialog = (props) => {
       />
       <button
         className={styles.buttonSecondary}
-        s
         onClick={() => props.onSaveCancel()}
       >
         Cancel

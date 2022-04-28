@@ -3,7 +3,7 @@
   display: flex;
   flex-flow: column nowrap;
   background-color: var(--nysse-blue);
-  width: 80%;
+  width: 90%;
   padding: 20px 0;
   height: 40px;
   border-radius: var(--border-radius);
