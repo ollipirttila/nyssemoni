@@ -34,6 +34,12 @@
   border-radius: var(--border-radius) 0 0 var(--border-radius);
   color: var(--dark-grey);
   flex-grow: 9;
+
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 15px;
 }
 
 .myStopsItem:hover {
@@ -42,10 +48,7 @@
   background-color: var(--nysse-dark-blue);
   color: white;
 }
-.userStopNameTitle {
-  text-transform: uppercase;
-  font-weight: 700;
-}
+
 .stopNameTitle {
   font-style: italic;
 }

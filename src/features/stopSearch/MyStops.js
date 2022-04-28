@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import MyStopDialog from "../../common/MyStopDialog";
@@ -39,18 +39,14 @@ const MyStops = (props) => {
     const savedStops = [];
     keys.forEach((key) => {
       savedStops.push(
-        <div key={key} className={styles.MystopsItemContainer}>
+        <Fragment>
           <div className={styles.myStopsItemsRow}>
             <div
               onClick={() => navigate(`/?stop=${key}`)}
               className={styles.myStopsItem}
             >
-              <span className={styles.userStopNameTitle}>
-                {JSON.parse(localStorage[key]).userStopName} –
-              </span>
-              <span className={styles.stopNameTitle}>
-                {JSON.parse(localStorage[key]).stopName + " / " + key}
-              </span>
+              {JSON.parse(localStorage[key]).userStopName} –{" "}
+              {JSON.parse(localStorage[key]).stopName + " / " + key}
             </div>
 
             <div
@@ -85,7 +81,7 @@ const MyStops = (props) => {
               Edit my stop
             </MyStopDialog>
           ) : null}
-        </div>
+        </Fragment>
       );
     });
     return savedStops;
@@ -95,7 +91,7 @@ const MyStops = (props) => {
       <div className={styles.myStopsDescription}>
         You can store your most used stops into browser memory.
       </div>
-      {getSavedStops()}
+      <div className={styles.MystopsItemContainer}>{getSavedStops()}</div>
     </div>
   );
 };
