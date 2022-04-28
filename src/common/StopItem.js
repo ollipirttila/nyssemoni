@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 
 import stopIcon from "../assets/bus-stop.svg";
 

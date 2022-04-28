@@ -1,9 +1,17 @@
-This is a learning project I used to learn React with Redux ([Redux Toolkit](https://redux-toolkit.js.org/) template).
-Usage of Redux store in such a small app might be a bit overkill, but this app was made in order to learn structures and practices to build more complex apps.
+## What is this app and what does it do?
 
-## App features
+Nyssemoni is a dashboard app (I actually use daily) to view real time data about departing busses from "favourite"
+bus stops, e.g. stops I use to and from work and hobbies. It makes it easy to see at a glance, when is my next available bus departing.
+The app leverages Tampere City's Public Transport [Journeys API](https://data.tampere.fi/data/en_GB/dataset/journeys-api)
+and browser local storage to save user preferences.
 
-Nyssemoni is a dashboard app I actually use every day to view real time data about departing busses from my daily bus stops, e.g. to and from work, hobbies etc. on my mobile phone, ipad or second monitor. The app leverages Tampere City's Public Transport Information API called [Journeys API](https://data.tampere.fi/data/en_GB/dataset/journeys-api) and browser local storage to save user preferences.
+This is a learning project I used to learn React with ([Redux Toolkit](https://redux-toolkit.js.org/) template).
+Usage of Redux store in such a small app might be a bit overkill, but this app was made in order to learn structures and
+practices to build more complex apps.
+
+### Live Demo
+
+[https://nyssemoni.elokuvaaja.fi/](https://nyssemoni.elokuvaaja.fi/)
 
 ### In the app you can:
 
