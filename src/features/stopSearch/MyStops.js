@@ -89,7 +89,11 @@ const MyStops = (props) => {
   return (
     <div className={styles.myStops}>
       <div className={styles.myStopsDescription}>
-        You can store your most used stops into browser memory.
+        <p>You can store your most used stops into browser memory.</p>
+        <p>
+          First find a bus stop, select it and save it by pressing the "save
+          stop to browser" button
+        </p>
       </div>
       <div className={styles.MystopsItemContainer}>{getSavedStops()}</div>
     </div>
