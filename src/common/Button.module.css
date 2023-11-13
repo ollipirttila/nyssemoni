@@ -6,3 +6,10 @@
   border-radius: var(--border-radius);
   padding: 20px 0;
 }
+
+.button:hover {
+  cursor: pointer;
+  color: var(--nysse-blue);
+  background-color: var(--nysse-dark-blue);
+  color: white;
+}
