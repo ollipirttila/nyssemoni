@@ -39,7 +39,7 @@ const MyStops = (props) => {
     const savedStops = [];
     keys.forEach((key) => {
       savedStops.push(
-        <Fragment>
+        <Fragment key={key}>
           <div className={styles.myStopsItemsRow}>
             <div
               onClick={() => navigate(`/?stop=${key}`)}

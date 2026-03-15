@@ -17,24 +17,20 @@ import MyStopDialog from "../../common/MyStopDialog";
 import BusItem from "../../common/BusItem";
 import SelectedStopItem from "../../common/SelectedStopItem";
 
-import styles from "./StopSearch.module.css";
+import styles from "./stopSearch.module.css";
 
 export default function StopSearch() {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [stopSavedToBrowser, setStopSavedToBrowser] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const closeDialog = () => {
-    setDialogOpen(false);
-  };
-  const openDialog = () => {
-    setDialogOpen(true);
-  };
+  const closeDialog = () => setDialogOpen(false);
+  const openDialog = () => setDialogOpen(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get URL query strings for use in case of direct URL accesss
+  // Get URL query strings for use in case of direct URL access
   let [urlQueryString, setUrlQueryString] = useSearchParams();
   let stopFromUrl = urlQueryString.get("stop");
 
@@ -105,34 +101,37 @@ export default function StopSearch() {
       ></StopItem>
     );
   });
+
   const renderedBusses = stopMonitoringData.map((bus) => {
     return <BusItem key={bus.vehicleRef} busData={bus}></BusItem>;
   });
+
   return (
     <div className={styles.stopSearch}>
-      {/* Search input field */}
+      {/* Search input — hidden once a stop is selected */}
       {!selectedStop && (
-        <div className={styles.searchSection}>
-          <div className={styles.searchDescription}>
-            Find your stop by name or number
+        <>
+          <div className={styles.searchSection}>
+            <div className={styles.searchDescription}>
+              Find your stop by name or number
+            </div>
+            <input
+              type="text"
+              placeholder="E.g. Keskustori or 0001"
+              className={styles.searchInput}
+              value={searchPhrase}
+              onChange={(e) => setSearchPhrase(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            placeholder="E.g. Keskustori or 0001"
-            className={styles.searchInput}
-            value={searchPhrase}
-            onChange={(e) => setSearchPhrase(e.target.value)}
-          />
-        </div>
+          <div className={styles.stopList}>
+            {searchPhrase.length !== 0 ? renderedStops : null}
+          </div>
+        </>
       )}
-      {/* Listing search results */}
-      <div className={styles.stopList}>
-        {!selectedStop ? (
-          searchPhrase.length !== 0 ? (
-            renderedStops
-          ) : null
-        ) : (
-          // Showing stops of selected bus stop
+
+      {/* Stop monitoring view — shown when a stop is selected */}
+      {selectedStop && (
+        <div className={styles.stopList}>
           <Fragment>
             <SelectedStopItem
               stopData={selectedStop}
@@ -158,8 +157,8 @@ export default function StopSearch() {
 
             {renderedBusses}
           </Fragment>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

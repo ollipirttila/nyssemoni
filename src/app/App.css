@@ -50,3 +50,40 @@
     height: 30vmin;
   }
 }
+
+/* Segmented control tabs */
+.tabs {
+  display: flex;
+  flex-direction: row;
+  background: var(--tab-bar-bg);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 9px 28px;
+  border-radius: 7px;
+  font-size: var(--font-size-regular);
+  color: var(--tab-inactive-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.tab:hover {
+  color: var(--nysse-blue);
+}
+
+.activeTab {
+  background: white;
+  color: var(--nysse-blue);
+  font-weight: 600;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.14);
+}

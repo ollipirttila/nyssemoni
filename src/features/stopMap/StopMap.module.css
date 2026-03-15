@@ -1,0 +1,16 @@
+.mapWrapper {
+  width: 100%;
+}
+
+.map {
+  width: 100%;
+  height: 60vh;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--light-grey);
+}
+
+@media only screen and (max-width: 900px) {
+  .map {
+    height: 70vh;
+  }
+}
