@@ -1,43 +1,74 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
-import { useDispatch } from "react-redux";
-import { setSelectedStop } from "../features/stopSearch/stopSearchSlice";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  Outlet,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faMapLocationDot, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../assets/Bus-logo.svg";
 import StopSearch from "../features/stopSearch/StopSearch";
+import StopMap from "../features/stopMap/StopMap";
 import MyStops from "../features/stopSearch/MyStops";
+import { getSelectedStop } from "../features/stopSearch/stopSearchSlice";
 import "./App.css";
 
-function App() {
-  const dispatch = useDispatch();
-
-  const clearSelectedStop = () => {
-    dispatch(setSelectedStop(null));
-  };
+function Layout() {
+  const selectedStop = useSelector(getSelectedStop);
 
   return (
     <div className="App">
       <div className="App-content">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <BrowserRouter>
-          <div className="App-navigation">
-            <Link onClick={clearSelectedStop} to="/">
+        {!selectedStop && (
+          <div className="tabs">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) => "tab" + (isActive ? " activeTab" : "")}
+            >
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
               Search
-            </Link>
-            <Link onClick={clearSelectedStop} to="/mystops">
+            </NavLink>
+            <NavLink
+              to="/map"
+              className={({ isActive }) => "tab" + (isActive ? " activeTab" : "")}
+            >
+              <FontAwesomeIcon icon={faMapLocationDot} />
+              Map
+            </NavLink>
+            <NavLink
+              to="/mystops"
+              className={({ isActive }) => "tab" + (isActive ? " activeTab" : "")}
+            >
+              <FontAwesomeIcon icon={faBookmark} />
               My Stops
-            </Link>
+            </NavLink>
           </div>
+        )}
 
-          <Routes>
-            <Route path="/" element={<StopSearch />} />
-            <Route path="/mystops" element={<MyStops />} />
-          </Routes>
-        </BrowserRouter>
+        <Outlet />
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<StopSearch />} />
+          <Route path="map" element={<StopMap />} />
+          <Route path="mystops" element={<MyStops />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
