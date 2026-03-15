@@ -16,12 +16,14 @@
 
 .searchInput {
   color: var(--dark-grey);
+  background-color: var(--surface);
   text-align: center;
   width: 100%;
+  max-width: 390px;
   height: 40px;
   font-size: var(--font-size-regular);
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid var(--input-border);
   padding: 0 10px 0 10px;
   border-radius: var(--border-radius);
 }

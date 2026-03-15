@@ -12,6 +12,12 @@
   --tab-inactive-color: #3d4a63;
   --dirty-black: #2c2c2a;
 
+  /* Semantic variables for surfaces and text */
+  --surface: white;
+  --body-bg: white;
+  --body-color: #2c2c2a;
+  --input-border: black;
+
   --font-size-regular: 1rem;
   --font-size-small: 0.75rem;
   --font-size-extra-small: 0.625rem;
@@ -20,4 +26,25 @@
   --border-radius: 4px;
 
   --breakpoint-narrow-desktop: 900px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bus-yellow: #ffda0f;
+    --bus-orange: rgb(255, 168, 6);
+    --nysse-blue: #5b8ee8;
+    --nysse-dark-blue: #4d7fd4;
+    --grey: #6c7a94;
+    --dark-grey: #9aa5bb;
+    --light-grey: #4a5a70;
+    --tab-bar-bg: #1a2335;
+    --tab-inactive-color: #8fa3c8;
+    --dirty-black: #3c3c3a;
+
+    --surface: #21396f;
+    --body-bg: #111827;
+    --body-color: #dce3f0;
+    --content-color: white;
+    --input-border: #4a5568;
+  }
 }

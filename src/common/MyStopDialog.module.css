@@ -5,7 +5,7 @@
   flex-flow: column nowrap;
   gap: 0.75rem;
   align-items: center;
-  background-color: white;
+  background-color: var(--surface);
   width: 90%;
   min-height: 35vh;
   text-align: center;
@@ -21,6 +21,9 @@
   padding: 0 10px;
   width: 80%;
   height: 2.5rem;
+  background-color: var(--surface);
+  color: var(--body-color);
+  border: 1px solid var(--input-border);
 }
 
 .buttonPrimary,
@@ -36,7 +39,7 @@
   color: white;
 }
 .buttonSecondary {
-  background-color: white;
+  background-color: var(--surface);
   color: var(--nysse-blue);
 
   height: 2.5rem;

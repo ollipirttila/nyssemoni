@@ -21,6 +21,7 @@
 .myStopsItemsRow {
   width: 90%;
   min-width: 280px;
+  max-width: 600px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

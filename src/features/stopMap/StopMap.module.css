@@ -3,7 +3,6 @@
 }
 
 .map {
-  width: 100%;
   height: 60vh;
   border-radius: var(--border-radius);
   border: 1px solid var(--light-grey);
@@ -12,5 +11,18 @@
 @media only screen and (max-width: 900px) {
   .map {
     height: 70vh;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .map :global(.leaflet-layer),
+  .map :global(.leaflet-control-zoom-in),
+  .map :global(.leaflet-control-zoom-out),
+  .map :global(.leaflet-control-attribution) {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  }
+
+  .map :global(.leaflet-container) {
+    background: #000;
   }
 }

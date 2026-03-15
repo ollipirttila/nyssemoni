@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap");
 
+html {
+  height: 100vh;
+}
+
 body {
   margin: 0;
   font-family: "Inria Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--body-bg);
+  color: var(--body-color);
 }
 
 a:link,
