@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  fetchStopDataSet,
   fetchStopMonitoringData,
   setSelectedStop,
   getStopDataSet,
@@ -40,11 +39,6 @@ export default function StopSearch() {
 
   //TODO: Show a loading spinner while data is loading.
   // const status = useSelector(getStatus);
-
-  // Fetch stopdata once when the app first renders
-  useEffect(() => {
-    stopData.length === 0 && dispatch(fetchStopDataSet());
-  }, [dispatch, stopData]);
 
   // If there is a URL Query string present, select the stop and initialize the app.
   // Also reset the dialog state and selectedStop, if the URL changes.

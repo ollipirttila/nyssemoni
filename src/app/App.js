@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -6,7 +6,7 @@ import {
   NavLink,
   Outlet,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faMapLocationDot, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,11 +14,17 @@ import logo from "../assets/Bus-logo.svg";
 import StopSearch from "../features/stopSearch/StopSearch";
 import StopMap from "../features/stopMap/StopMap";
 import MyStops from "../features/stopSearch/MyStops";
-import { getSelectedStop } from "../features/stopSearch/stopSearchSlice";
+import { fetchStopDataSet, getSelectedStop, getStopDataSet } from "../features/stopSearch/stopSearchSlice";
 import "./App.css";
 
 function Layout() {
+  const dispatch = useDispatch();
   const selectedStop = useSelector(getSelectedStop);
+  const stops = useSelector(getStopDataSet);
+
+  useEffect(() => {
+    if (stops.length === 0) dispatch(fetchStopDataSet());
+  }, [dispatch, stops]);
 
   return (
     <div className="App">
