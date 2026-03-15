@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./StopMap.module.css";
@@ -66,7 +67,7 @@ function parseLocation(locationStr) {
 // Clicking a marker calls onSelectStop with the full stop object,
 // matching the same flow as selecting a stop from the search list.
 function StopMarkers({ stops, onSelectStop }) {
-  return stops.map((stop) => {
+  const markers = stops.map((stop) => {
     const position = parseLocation(stop.location);
     if (!position) return null;
     return (
@@ -80,6 +81,11 @@ function StopMarkers({ stops, onSelectStop }) {
       />
     );
   });
+  return (
+    <MarkerClusterGroup disableClusteringAtZoom={16}>
+      {markers}
+    </MarkerClusterGroup>
+  );
 }
 
 export default function StopMap() {
