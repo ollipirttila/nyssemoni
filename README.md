@@ -15,8 +15,8 @@ practices to build more complex apps.
 
 ### In the app you can:
 
-1. Search for a Tampere region bus stop by name or code
-2. Save any stop to your favourite stops for quick access
+1. Search for a Tampere region bus stop by name or code OR select your desired bus stop from a map that orients you based on your device location.
+2. Save any stop to your favourite stops for quick access (browser storage)
 3. Edit and delete your quick access stops.
 
 ## Available Scripts
