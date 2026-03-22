@@ -37,3 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Builds the app for production to the `build` folder.<br />
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### Deployment via github actions
+
+The project also includes Github Actions Workflow that builds and deployes this project via FTP to your desired location.
