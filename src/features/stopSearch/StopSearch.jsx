@@ -74,7 +74,7 @@ export default function StopSearch() {
       JSON.stringify({
         userStopName: customName,
         stopName: selectedStop.name,
-      })
+      }),
     );
     setStopSavedToBrowser(true);
     closeDialog();
@@ -83,7 +83,7 @@ export default function StopSearch() {
   const SearchResults = stopData.filter(
     (item) =>
       item.name.toLowerCase().search(searchPhrase.toLowerCase()) !== -1 ||
-      item.shortName.search(searchPhrase) !== -1
+      item.shortName.search(searchPhrase) !== -1,
   );
 
   const renderedStops = SearchResults.map((stop) => {
@@ -107,7 +107,7 @@ export default function StopSearch() {
         <>
           <div className={styles.searchSection}>
             <div className={styles.searchDescription}>
-              Find your stop by name or number
+              Find your stop by name or number - testing
             </div>
             <input
               type="text"
