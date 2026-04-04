@@ -1,1 +1,34 @@
-# TODO - Deploy via SSH? https://github.com/SamKirkland/web-deploy
+on:
+  push:
+    branches:
+      - production
+
+name: deploy nyssemoni
+jobs:
+  web-deploy:
+    name: deploy nyssemoni
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Latest Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Sync Files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ secrets.SSH_SERVER }}
+          remote-user: ${{ secrets.SSH_USER }}
+          private-ssh-key: ${{ secrets.SSH_KEY }}
+          source-path: ./dist/
+          destination-path: ${{ secrets.SERVER_DESTINATION_DIRECTORY }}
