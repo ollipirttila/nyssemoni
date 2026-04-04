@@ -107,7 +107,7 @@ export default function StopSearch() {
         <>
           <div className={styles.searchSection}>
             <div className={styles.searchDescription}>
-              Find your stop by name or number - testing
+              Find your stop by name or number
             </div>
             <input
               type="text"
